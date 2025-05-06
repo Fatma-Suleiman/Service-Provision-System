@@ -1,0 +1,113 @@
+.jumbotron {
+  background-image: url('/images/community.jpeg'); /* Replace with your hero image URL */
+  background-size: cover;
+  background-position: center;
+  color: white; /* Set text color to white for better contrast */
+  padding: 5rem 1rem; /* Increase padding for better spacing */
+  text-align: center; /* Ensure the text is centered */
+}
+
+.jumbotron h1 {
+  font-size: 3rem; /* Adjust the font size for the header */
+  font-weight: bold; /* Make the header bold for better visibility */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add a subtle shadow to the text for contrast */
+}
+
+.jumbotron .lead {
+  font-size: 1.5rem; /* Increase font size for the lead text */
+  font-weight: normal; /* Make the lead text a bit lighter */
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3); /* Add a subtle shadow to the text for contrast */
+}
+
+  /* Featured Services Section */
+#featured-services {
+  padding: 50px 20px;
+  background-color: burlywood; /* Light grey background */
+}
+
+#featured-services h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Service Card Styling */
+.card {
+  border: none;
+  border-radius: 12px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: #ffffff;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Card Body */
+.card-body {
+  text-align: center;
+  padding: 20px;
+}
+
+/* Service Title */
+.card-title {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #007bff; /* Bootstrap primary blue */
+}
+
+/* Service Description */
+.card-text {
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.5;
+}
+
+/* Review Form Styling */
+.review-form {
+  background: burlywood;           /* Light gray background */
+  padding: 20px;                 /* Inner spacing */
+  border: 1px solid #ddd;        /* Light border */
+  border-radius: 5px;            /* Rounded corners */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  margin-top: 20px;              /* Space above the form */
+}
+
+/* Form Title */
+.review-form h4 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Input and Textarea Styling */
+.review-form .form-control {
+  border-radius: 4px;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 15px;
+}
+
+/* Button Styling */
+.review-form .btn {
+  font-size: 16px;
+  padding: 10px 20px;
+  border-radius: 4px;
+}
+
+/* Adjust spacing for buttons */
+.review-form .btn + .btn {
+  margin-left: 10px;
+}
+
+
+/* Responsive Grid for Mobile */
+@media (max-width: 768px) {
+  .col-md-4 {
+      width: 100%;
+  }
+}
