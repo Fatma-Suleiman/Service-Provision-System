@@ -1,4 +1,4 @@
-// src/screens/ServiceDetail.jsx
+
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import api from '../api';
@@ -13,7 +13,7 @@ const ServiceDetail = () => {
   const [bookingError, setBookingError] = useState('');
   const [imageLoading, setImageLoading] = useState(true);
 
-  // 1) Load the service details
+  //  Load the service details
   useEffect(() => {
     const fetchService = async () => {
       try {

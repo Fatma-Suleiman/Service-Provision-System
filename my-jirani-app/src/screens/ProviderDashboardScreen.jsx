@@ -15,11 +15,11 @@ const ProviderDashboard = () => {
   useEffect(() => {
     const fetchDashboard = async () => {
       try {
-        // 1) Fetch booking summary
+        //  Fetch booking summary
         const { data: summaryData } = await api.get('/providers/me/summary');
         setSummary(summaryData);
 
-        // 2) Fetch recent requests
+        //  Fetch recent requests
         const { data: requestsData } = await api.get('/providers/me/requests');
         const transformed = requestsData
           .slice(0, 5)
@@ -32,7 +32,7 @@ const ProviderDashboard = () => {
             status: r.status,
           }));
 
-        console.log('Dashboard recentRequests ➡️', transformed);
+        console.log('Dashboard recentRequests ', transformed);
         setRecentRequests(transformed);
       } catch (err) {
         console.error('Error loading dashboard data:', err);

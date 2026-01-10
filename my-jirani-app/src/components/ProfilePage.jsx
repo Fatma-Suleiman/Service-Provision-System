@@ -1,6 +1,6 @@
-// src/screens/ProfilePage.jsx
+
 import React, { useState, useEffect } from 'react';
-import api from '../api';                // your centralized axios instance
+import api from '../api';               
 import { useNavigate } from 'react-router-dom';
 
 const ProfilePage = () => {

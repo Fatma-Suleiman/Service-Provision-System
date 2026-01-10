@@ -27,13 +27,13 @@ const LoginScreen = () => {
     setMessage('');
 
     try {
-      // 1) Login via api instance
+      //  Login via api instance
       const { data } = await api.post('/auth/login', {
         email: formData.email,
         password: formData.password
       });
 
-      // 2) Store token & username
+      // Store token & username
       const storage = formData.rememberMe ? localStorage : sessionStorage;
       storage.setItem('token', data.token);
       storage.setItem('username', data.user.username);
@@ -53,7 +53,7 @@ const LoginScreen = () => {
 
     if (role === 'provider') {
       try {
-        // Interceptor will attach the token automatically
+        // Interceptor  attach the token automatically
         await api.get('/providers/me');
         navigate('/provider/my-profile');
       } catch (err) {

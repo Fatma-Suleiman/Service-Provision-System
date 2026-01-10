@@ -24,18 +24,18 @@ export default function ProviderRequestsScreen() {
 
   const changeStatus = async (id, newStatus) => {
     try {
-      // 1. Optimistic update
-      setRequests(prev => prev.map(r => 
+      //  Optimistic update
+      setRequests(prev => prev.map(r =>
         r.id === id ? { ...r, status: newStatus } : r
       ));
       setPendingUpdates(prev => ({ ...prev, [id]: newStatus }));
 
-      // 2. Actual API call
+      //  Actual API call
       await api.put(`/providers/me/requests/${id}`, { status: newStatus });
 
     } catch (err) {
-      // 3. Rollback on error
-      setRequests(prev => prev.map(r => 
+      //  Rollback on error
+      setRequests(prev => prev.map(r =>
         r.id === id ? { ...r, status: pendingUpdates[id] } : r
       ));
       alert(err.response?.data?.message || 'Update failed. Try again.');
@@ -48,10 +48,18 @@ export default function ProviderRequestsScreen() {
     }
   };
 
-
   return (
     <div className="container py-4">
       <h2>Your Incoming Requests</h2>
+
+      {/* Brief overview subtitle */}
+      <p className="text-muted">Overview of recent service requests</p>
+
+      {/* Business notice */}
+      <div className="alert alert-info text-center">
+        Here are the latest service requests awaiting your action. Please review and prioritize accordingly.
+      </div>
+
       {requests.length === 0 ? (
         <p>No requests yet.</p>
       ) : (

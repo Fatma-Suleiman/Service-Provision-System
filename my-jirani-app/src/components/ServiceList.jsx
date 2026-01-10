@@ -1,7 +1,7 @@
-// src/screens/ServiceList.jsx
+
 import React, { useState, useEffect } from 'react';
-import api from '../api';             // your token-aware axios instance
-import axios from 'axios';           // still used for geocoding
+import api from '../api';             
+import axios from 'axios';          
 import MapComponent from './MapComponent';
 import { useParams } from 'react-router-dom';
 
@@ -54,7 +54,7 @@ const ServiceList = () => {
           params.long = coords.lon;
         }
 
-        // Use api.get instead of axios.get with full URL
+        
         const { data } = await api.get('/services', { params });
 
         // Handle both response shapes
@@ -108,3 +108,5 @@ const ServiceList = () => {
 };
 
 export default ServiceList;
+
+

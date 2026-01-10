@@ -1,4 +1,4 @@
-// src/screens/ProviderProfileView.jsx
+
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../api';
@@ -36,23 +36,20 @@ const ProviderProfileView = () => {
     <div className="container py-5">
       <div className="card shadow-lg">
         <div className="row g-0">
-          {profile.image && (
-            <div className="col-md-4">
-              <img
-                // Use the normalized path coming from your backend:
-                src={profile.image}
-                className="img-fluid rounded-start h-100 w-100"
-                alt={profile.name}
-                style={{ objectFit: 'cover' }}
-                onError={e => {
-                  // Prevent an infinite error loop
-                  e.currentTarget.onerror = null;
-                  // Fallback to a known-good stock image in public/images
-                  e.currentTarget.src = '/images/default-service.jpg';
-                }}
-              />
-            </div>
-          )}
+          
+        <div className="col-md-4">
+  <img
+    src={profile.image || '/images/default-service.jpg'}
+    className="img-fluid rounded-start h-100 w-100"
+    alt={profile.name || 'Your service'}
+    style={{ objectFit: 'cover' }}
+    onError={e => {
+      e.currentTarget.onerror = null;
+      e.currentTarget.src = '/images/default-service.jpg';
+    }}
+  />
+</div>
+
           <div className={`col-md-${profile.image ? '8' : '12'}`}>
             <div className="card-body">
               <h3 className="card-title text-primary">{profile.name}</h3>

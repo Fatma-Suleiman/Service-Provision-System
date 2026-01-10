@@ -1,7 +1,7 @@
-import React from 'react';
+
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import HomeScreen from './screens/HomeScreen';
@@ -19,11 +19,11 @@ import ProviderHistoryScreen from './screens/ProviderHistoryScreen';
 import ProviderDashboard from './screens/ProviderDashboardScreen';
 import ProviderProfileView from './screens/ProviderProfileViewScreen';
 import ProviderRequestsScreen from './screens/ProviderRequestsScreen';
+ 
 
 
 function App() {
   return (
-    <Router>
       <div className="App">
         <Navbar />
         <div className="container my-4">
@@ -43,12 +43,11 @@ function App() {
             <Route path="/provider/dashboard" element={<ProviderDashboard />} />
             <Route path="/provider/my-profile" element={<ProviderProfileView />} />
             <Route path="/provider/requests" element={<ProviderRequestsScreen />} />
-
           </Routes>
         </div>
         <Footer />
       </div>
-    </Router>
+
   );
 }
 

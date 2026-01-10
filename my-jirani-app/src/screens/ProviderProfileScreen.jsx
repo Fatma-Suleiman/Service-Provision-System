@@ -32,7 +32,7 @@ const ProviderProfileScreen = () => {
           price: data.price?.toString() || '',
           location: data.location || '',
           image: null,
-          imageUrl: data.image || null,    // <-- set initial preview URL
+          imageUrl: data.image || null,    // set initial preview URL
         });
       })
       .catch(err => {
@@ -223,6 +223,8 @@ const ProviderProfileScreen = () => {
               />
             </div>
           )}
+
+          
 
           {/* Image Upload */}
           <div className="mb-3">

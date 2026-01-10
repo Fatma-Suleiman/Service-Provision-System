@@ -1,4 +1,4 @@
-// src/screens/SeekerProfileScreen.jsx
+
 import React, { useEffect, useState } from 'react';
 import api from '../api';
 import { useNavigate } from 'react-router-dom';
@@ -21,7 +21,7 @@ const SeekerProfileScreen = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        // our back-end returns { user: { id, username, email, phone_number }, bookings: [...] }
+        // back-end returns { user: { id, username, email, phone_number }, bookings: [...] }
         const { data } = await api.get('/auth/profile');
         const { user, bookings } = data;
         setProfile({ user, bookings });

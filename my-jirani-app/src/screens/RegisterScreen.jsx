@@ -9,7 +9,7 @@ const RegisterScreen = () => {
   const [formData, setFormData] = useState({
     username:     '',
     email:        '',
-    phone_number: '',     // ← must match back-end
+    phone_number: '',     
     password:     '',
     confirmPassword: ''
   });
@@ -34,7 +34,7 @@ const RegisterScreen = () => {
       await api.post('/auth/register', {
         username:     formData.username,
         email:        formData.email,
-        phone_number: formData.phone_number,  // ← send this
+        phone_number: formData.phone_number,  
         password:     formData.password
       });
 

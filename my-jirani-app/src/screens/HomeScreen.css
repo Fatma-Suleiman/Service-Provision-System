@@ -1,34 +1,47 @@
+
+:root {
+  --primary-color: #1588ce;
+  --light-bg: #f5faff;
+  --dark-text: #333;
+}
+
+.home-container {
+  font-family: 'Segoe UI', sans-serif;
+  color: var(--dark-text);
+}
+
+
 .jumbotron {
-  background-image: url('/images/community.jpeg'); /* Replace with your hero image URL */
+  background-image: url('/images/community.jpeg'); /*  hero image URL */
   background-size: cover;
   background-position: center;
-  color: white; /* Set text color to white for better contrast */
+  color: white; /*  text color white for better contrast */
   padding: 5rem 1rem; /* Increase padding for better spacing */
   text-align: center; /* Ensure the text is centered */
 }
 
 .jumbotron h1 {
-  font-size: 3rem; /* Adjust the font size for the header */
-  font-weight: bold; /* Make the header bold for better visibility */
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add a subtle shadow to the text for contrast */
+  font-size: 3rem; /* font size for the header */
+  font-weight: bold; /* header bold for better visibility */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /*  shadow to the text for contrast */
 }
 
 .jumbotron .lead {
-  font-size: 1.5rem; /* Increase font size for the lead text */
-  font-weight: normal; /* Make the lead text a bit lighter */
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3); /* Add a subtle shadow to the text for contrast */
+  font-size: 1.5rem; /*  font size for the lead text */
+  font-weight: normal; /* lead text a bit lighter */
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3); /*shadow to the text for contrast */
 }
 
   /* Featured Services Section */
 #featured-services {
   padding: 50px 20px;
-  background-color: burlywood; /* Light grey background */
+  background-color:#1588ce; 
 }
 
 #featured-services h2 {
   font-size: 2rem;
   font-weight: bold;
-  color: #333;
+  color:#333;
 }
 
 /* Service Card Styling */
@@ -42,7 +55,7 @@
 
 .card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }
 
 /* Card Body */
@@ -55,7 +68,7 @@
 .card-title {
   font-size: 1.4rem;
   font-weight: bold;
-  color: #007bff; /* Bootstrap primary blue */
+  color:rgba(0, 0, 0, 0.5); 
 }
 
 /* Service Description */
@@ -67,7 +80,7 @@
 
 /* Review Form Styling */
 .review-form {
-  background: burlywood;           /* Light gray background */
+  background: #f5faff;           /* Light gray background */
   padding: 20px;                 /* Inner spacing */
   border: 1px solid #ddd;        /* Light border */
   border-radius: 5px;            /* Rounded corners */
@@ -86,7 +99,7 @@
   border-radius: 4px;
   padding: 10px;
   font-size: 16px;
-  border: 1px solid #ccc;
+  border: 1px solid #1588ce;
   width: 100%;
   box-sizing: border-box;
   margin-bottom: 15px;
@@ -111,3 +124,5 @@
       width: 100%;
   }
 }
+
+
