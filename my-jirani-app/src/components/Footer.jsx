@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { FaEnvelope, FaPhone, FaFacebook, FaTwitter, FaInstagram } from 'react-icons/fa'; // Icons for contact and social media
 
 const Footer = () => {
