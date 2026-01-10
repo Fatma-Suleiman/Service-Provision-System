@@ -1,4 +1,4 @@
-// controllers/services.js
+
 const db = require('../db');
 
 exports.getServiceById = async (req, res) => {

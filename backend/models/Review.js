@@ -1,5 +1,4 @@
 
-// models/Review.js
 const db = require('../db');
 
 const Review = {

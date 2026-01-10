@@ -6,13 +6,13 @@ const db = require('../db');
 exports.register = async (req, res) => {
   const { username, email, password, phone_number } = req.body;
 
-  // 1) All fields required
+  // All fields required
   if (!username || !email || !password || !phone_number) {
     return res.status(400).json({ message: 'All fields are required' });
   }
 
   try {
-    // 2) Check if email already exists
+    // Check if email already exists
     const [existing] = await db.query(
       'SELECT id FROM users WHERE LOWER(email)=LOWER(?)',
       [email]
@@ -21,25 +21,25 @@ exports.register = async (req, res) => {
       return res.status(400).json({ message: 'User already exists' });
     }
 
-    // 3) Hash password
+    // Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // 4) Generate token now
+    // Generate token now
     const token = jwt.sign(
-      { id: null, username, email },         // we'll ignore id here
+      { id: null, username, email },
       process.env.JWT_SECRET,
       { expiresIn: '90d' }
     );
 
-    // 5) Insert everything _including_ token
+    // Insert everything _including_ token
     const [result] = await db.query(
       `INSERT INTO users
          (username, email, password, phone_number, token)
-       VALUES (?, ?, ?, ?, ?)`,
+       VALUES (?, ?, ?, ?, ?)`,          // ← comma added here
       [username, email.toLowerCase(), hashedPassword, phone_number, token]
     );
 
-    // 6) (Optional) re-sign token with real id, then update:
+    // Re-sign token with real id, then update:
     const realToken = jwt.sign(
       { id: result.insertId },
       process.env.JWT_SECRET,
@@ -50,7 +50,7 @@ exports.register = async (req, res) => {
       [realToken, result.insertId]
     );
 
-    // 7) Return the fresh user & token
+    // Return the fresh user & token
     res.status(201).json({
       token: realToken,
       user: {
@@ -74,7 +74,7 @@ exports.login = async (req, res) => {
   const { email, password } = req.body;
   
   try {
-    // 1) Validate input
+    //  Validate input
     if (!email || !password) {
       return res.status(400).json({ 
         success: false,
@@ -82,7 +82,7 @@ exports.login = async (req, res) => {
       });
     }
 
-    // 2) Check user existence (case-insensitive)
+    //  Check user existence (case-insensitive)
     const [users] = await db.query(
       'SELECT * FROM users WHERE LOWER(email) = LOWER(?)', 
       [email]
@@ -96,7 +96,7 @@ exports.login = async (req, res) => {
     }
     const user = users[0];
 
-    // 3) Verify password
+    //  Verify password
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
       return res.status(401).json({
@@ -105,7 +105,7 @@ exports.login = async (req, res) => {
       });
     }
 
-    // 4) JWT_SECRET check
+    //  JWT_SECRET check
     if (!process.env.JWT_SECRET) {
       console.error('JWT_SECRET missing in environment');
       return res.status(500).json({
@@ -114,20 +114,20 @@ exports.login = async (req, res) => {
       });
     }
 
-    // 5) Generate token
+    //  Generate token
     const token = jwt.sign(
       { id: user.id },  // Minimal payload for security
       process.env.JWT_SECRET,
       { expiresIn: '90d' }
     );
 
-    // 6) Update token in database
+    //  Update token in database
     await db.query(
       'UPDATE users SET token = ? WHERE id = ?',
       [token, user.id]
     );
 
-    // 7) Successful response
+    //  Successful response
     res.status(200).json({
       success: true,
       token,
@@ -146,9 +146,6 @@ exports.login = async (req, res) => {
     });
   }
 };
-// Get user profile along with booking history
-// Get user profile + booking history
-// controllers/authController.js
 
 // Get user profile along with booking history
 exports.getProfile = async (req, res) => {
@@ -195,7 +192,7 @@ exports.getProfile = async (req, res) => {
 exports.updateProfile = async (req, res) => {
   const { username, email, phone_number } = req.body;
 
-  // Phone is now always required on update
+  // Phone  always required on update
   if (!phone_number) {
     return res.status(400).json({ message: 'Phone number is required' });
   }
@@ -203,7 +200,7 @@ exports.updateProfile = async (req, res) => {
   try {
 
     //uniqueness check for email and username
-    // 1) ensure email is unique
+  
     const [emailCheck] = await db.query(
       'SELECT id FROM users WHERE LOWER(email)=LOWER(?) AND id != ?',
       [email, req.user.id]
@@ -212,7 +209,7 @@ exports.updateProfile = async (req, res) => {
       return res.status(400).json({ message: 'Email already in use' });
     }
 
-    // 2) ensure username is unique
+    
     const [usernameCheck] = await db.query(
       'SELECT id FROM users WHERE LOWER(username)=LOWER(?) AND id != ?',
       [username, req.user.id]
@@ -221,7 +218,7 @@ exports.updateProfile = async (req, res) => {
       return res.status(400).json({ message: 'Username already in use' });
     }
 
-    // 3) update all three fields
+    // update all three fields
     await db.query(
       `UPDATE users
          SET username     = ?,
@@ -231,7 +228,7 @@ exports.updateProfile = async (req, res) => {
       [username, email.toLowerCase(), phone_number || null, req.user.id]
     );
 
-    // 4) respond with fresh user object
+    // respond with fresh user object
     res.json({
       success: true,
       user: {

@@ -6,12 +6,11 @@ const bodyParser = require('body-parser');
 const path    = require('path');
 const db      = require('./db');
 
-// Routers (make sure these are the files under /routes, not controllers)
 const reviewRoutes           = require('./routes/reviewRoutes');
 const authRoutes             = require('./routes/authRoutes');
 const serviceRoutes          = require('./routes/serviceRoutes');
 const bookingsRoutes         = require('./routes/bookingsRoutes');
-const providersRoutes      = require('./routes/providers');        // <— your file under routes/
+const providersRoutes      = require('./routes/providers');        
 const serviceRequestsRoutes = require('./routes/serviceRequests');
 
 

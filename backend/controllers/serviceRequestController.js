@@ -1,9 +1,6 @@
 const db = require('../db');
 
-/**
- * 1) getCompletedRequests
- *    — provider-side. Returns requests this provider has completed.
- */
+//provider
 exports.getCompletedRequests = async (req, res) => {
   try {
     // find provider profile
@@ -39,11 +36,7 @@ exports.getCompletedRequests = async (req, res) => {
   }
 };
 
-/**
- * 2) getCompletedForSeeker
- *    — seeker-side. Returns requests this user (seeker) has completed,
- *      for populating the “Select Completed Service” dropdown in HomeScreen.
- */
+
 exports.getCompletedForSeeker = async (req, res) => {
   try {
     const seekerId = req.user.id;
@@ -63,10 +56,7 @@ exports.getCompletedForSeeker = async (req, res) => {
   }
 };
 
-/**
- * 3) updateRequestStatus
- *    — provider-side. Marks a service_requests row and its booking to the new status.
- */
+
 exports.updateRequestStatus = async (req, res) => {
   const { id }     = req.params;
   const { status } = req.body;

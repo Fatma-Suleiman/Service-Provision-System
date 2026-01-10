@@ -4,7 +4,7 @@ const path = require('path');
 // Configure disk storage: files go into /uploads, named with a timestamp + original extension
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    // ensure this folder exists: /backend/uploads
+    //In folder  /backend/uploads
     cb(null, path.join(__dirname, '../uploads'));
   },
   filename: (req, file, cb) => {

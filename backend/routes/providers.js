@@ -1,7 +1,8 @@
-// routes/providers.js
+
 const express = require('express');
 const router = express.Router();
 const { protect } = require('../controllers/authController');
+const { getProvidersByCategory } = require('../controllers/providers');
 const upload = require('../middlewares/uploadMiddleware');
 
 const {
@@ -18,6 +19,9 @@ const { getProviderReviews } = require('../controllers/reviewController');
 
 // Protect all routes below
 router.use(protect);
+
+// Public (to authenticated users): list providers in a category, with optional ?minRating=
+  router.get('/category/:category',getProvidersByCategory);
 
 // Profile
 router.route('/me')

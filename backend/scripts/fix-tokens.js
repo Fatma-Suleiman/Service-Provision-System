@@ -2,11 +2,11 @@ require('dotenv').config({ path: require('path').join(__dirname, '../backend/.en
 const jwt = require('jsonwebtoken');
 const mysql = require('mysql2/promise');
 
-// Create a direct connection pool with proper encoding
+//  direct connection pool with proper encoding
 const pool = mysql.createPool({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD, // Now properly handles special characters
+  password: process.env.DB_PASSWORD, // properly handles special characters
   database: process.env.DB_NAME,
   waitForConnections: true,
   connectionLimit: 10,

@@ -1,12 +1,6 @@
-// controllers/bookings.js
+
 const db = require('../db');
 
-/**
- * Create a new booking.
- * POST /api/bookings
- * Body: { service_id }
- * Requires: req.user from auth.protect()
- */
 exports.createBooking = async (req, res) => {
   console.log('*** createBooking called for user', req.user.id, 'body=', req.body);
 
@@ -32,7 +26,7 @@ exports.createBooking = async (req, res) => {
     }
     const providerId = provider.id;
 
-    // 1) Insert into bookings (seeker history)
+    //  Insert into bookings (seeker history)
     const [bookingResult] = await db.query(
       `INSERT INTO bookings
          (service_id, user_id, user_name, user_contact, booking_date)
@@ -40,7 +34,7 @@ exports.createBooking = async (req, res) => {
       [service_id, userId, userName, userContact]
     );
 
-    // 2) Insert into service_requests for provider dashboard
+    // Insert into service_requests for provider dashboard
     await db.query(
       `INSERT INTO service_requests
          (booking_id, user_id, provider_id, details, status)
@@ -58,7 +52,7 @@ exports.createBooking = async (req, res) => {
       '  ➤ providerId=', providerId
     );
 
-    // 3) Return the new booking to the client
+    //  Return the new booking to the client
     res.status(201).json({
       id:           bookingResult.insertId,
       service_id,
@@ -82,8 +76,8 @@ exports.cancelBooking = async (req, res) => {
   const userId    = req.user.id;  // seeker’s user ID
 
   try {
-    // 1) Verify this booking belongs to the logged-in user
-    //    (we only need id and user_id here)
+    // Verify this booking belongs to the logged-in user
+    // only need id and user_id here
     const [[bk]] = await db.query(
       'SELECT id, user_id FROM bookings WHERE id = ?',
       [bookingId]
@@ -95,13 +89,13 @@ exports.cancelBooking = async (req, res) => {
       return res.status(403).json({ message: 'Not authorized to cancel this booking' });
     }
 
-    // 2) Update booking status to 'cancelled'
+    // Update booking status to 'cancelled'
     await db.query(
       'UPDATE bookings SET status = ? WHERE id = ?',
       ['cancelled', bookingId]
     );
 
-    // 3) Also mark the linked service_request (by its booking_id)
+    //  mark the linked service_request (by its booking_id)
     await db.query(
       'UPDATE service_requests SET status = ? WHERE booking_id = ?',
       ['cancelled', bookingId]
@@ -115,10 +109,7 @@ exports.cancelBooking = async (req, res) => {
 };
 
 
-/**
- * Get all service requests for the logged-in seeker.
- * GET /api/bookings       (with auth.protect)
- */
+//provider
 exports.getMyBookings = async (req, res) => {
   try {
     const userId = req.user.id;

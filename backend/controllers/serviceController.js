@@ -1,4 +1,4 @@
-// controllers/serviceController.js
+
 const db = require('../db');
 
 // Helper: Haversine formula for distance calculation

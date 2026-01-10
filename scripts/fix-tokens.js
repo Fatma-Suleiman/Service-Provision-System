@@ -2,11 +2,11 @@ require('dotenv').config({ path: require('path').join(__dirname, '../backend/.en
 const jwt = require('jsonwebtoken');
 const mysql = require('mysql2/promise');
 
-// Create a direct connection pool with proper encoding
+// Creating a direct connection pool with proper encoding
 const pool = mysql.createPool({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD, // Now properly handles special characters
+  password: process.env.DB_PASSWORD, 
   database: process.env.DB_NAME,
   waitForConnections: true,
   connectionLimit: 10,
@@ -52,9 +52,9 @@ async function fixNullTokens() {
       console.log(`Updated token for user ${user.id}`);
     }
 
-    console.log('✅ All null tokens fixed!');
+    console.log(' All null tokens fixed!');
   } catch (error) {
-    console.error('❌ Error:', error);
+    console.error(' Error:', error);
   } finally {
     if (connection) connection.release();
     await pool.end();
