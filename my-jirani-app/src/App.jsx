@@ -3,7 +3,7 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
-import Footer from '../components/Footer';
+import Footer from './components/Footer';
 import HomeScreen from './screens/HomeScreen';
 import AboutScreen from './screens/AboutScreen';
 import LoginScreen from './screens/LoginScreen';
