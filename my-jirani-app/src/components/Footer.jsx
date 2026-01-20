@@ -1,5 +1,5 @@
 
-import { FaEnvelope, FaPhone, FaFacebook, FaTwitter, FaInstagram } from 'react-icons/fa'; // Icons for contact and social media
+import { FaEnvelope, FaPhone, FaFacebook, FaTwitter, FaInstagram } from 'react-icons/fa'; 
 
 const Footer = () => {
   return (
