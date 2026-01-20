@@ -15,9 +15,10 @@ const serviceRequestsRoutes  = require('./routes/serviceRequests');
 const app  = express();
 const port = process.env.PORT || 5000;
 
+
 const allowedOrigins = [
   'http://localhost:5173',
-  'https://serviceprovision-jirani-g298kbt77-fatmas-projects-ca2a6fa1.vercel.app',
+  'https://serviceprovision-jirani.vercel.app/', 
 ];
 
 app.use(cors({
@@ -26,6 +27,7 @@ app.use(cors({
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
+      console.log('Blocked origin:', origin); 
       callback(new Error('Not allowed by CORS'));
     }
   },
@@ -44,7 +46,6 @@ app.get('/test-db', async (req, res) => {
     res.status(500).json({ message: 'Database connection failed' });
   }
 });
-
 
 app.use('/api/reviews',          reviewRoutes);
 app.use('/api/auth',             authRoutes);
