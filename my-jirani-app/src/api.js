@@ -1,10 +1,9 @@
 
 import axios from 'axios';
 
-// An Axios instance with base API URL
-const api = axios.create({
-  baseURL: 'http://localhost:5000/api', 
 
+const api = axios.create({
+ baseURL: 'https://project-jirani-backend.onrender.com/api',
 });
 
 // Automatically attach token on every request
