@@ -18,4 +18,4 @@ A dynamic application that bridges the gap between local service providers and c
 
 ## Live Demo
 
-[Click here to view the live demo](https://kapu-ecommerce.vercel.app/)# Service-Provision-System
+[Click here to view the live demo](https://servicesystem-omega.vercel.app/)# Service-Provision-System
