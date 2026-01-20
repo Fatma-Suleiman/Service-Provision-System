@@ -7,9 +7,10 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
+# Node modules & build
+node_modules/
+dist/
+dist-ssr/
 *.local
 
 # Editor directories and files
@@ -23,12 +24,12 @@ dist-ssr
 *.sln
 *.sw?
 
-
 # Environment variables
-backend/.env
+../backend/.env
+.env
 
 # Uploaded files
-backend/uploads/
+../backend/uploads/
 
 # Images
 *.jpg
