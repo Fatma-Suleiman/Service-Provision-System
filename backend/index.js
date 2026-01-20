@@ -17,7 +17,7 @@ const port = process.env.PORT || 5000;
 
 const allowedOrigins = [
   'http://localhost:5173',
-  'https://serviceprovision-jirani-rh6ds3u83-fatmas-projects-ca2a6fa1.vercel.app', 
+  'https://serviceprovision-jirani-g298kbt77-fatmas-projects-ca2a6fa1.vercel.app',
 ];
 
 app.use(cors({
