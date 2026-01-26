@@ -1,99 +1,97 @@
-// src/screens/ProviderProfileScreen.jsx
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import api from '../api';
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import api from "../api";
 
 const ProviderProfileScreen = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    name: '',
-    category: '',
-    phone_number: '',
-    description: '',
-    price: '',
-    location: '',
-    image: null,      // the File object when picking a new image
-    imageUrl: null,   // the URL (either from server or objectURL) for preview
+    name: "",
+    category: "",
+    phone_number: "",
+    description: "",
+    price: "",
+    location: "",
+    image: null,
+    imageUrl: null,
   });
   const [existingProfile, setExistingProfile] = useState(null);
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  // On mount: load existing profile if any
   useEffect(() => {
-    api.get('/providers/me')
+    api
+      .get("/providers/me")
       .then(({ data }) => {
         setExistingProfile(true);
         setFormData({
           name: data.name,
           category: data.category,
           phone_number: data.phone_number,
-          description: data.description || '',
-          price: data.price?.toString() || '',
-          location: data.location || '',
+          description: data.description || "",
+          price: data.price?.toString() || "",
+          location: data.location || "",
           image: null,
-          imageUrl: data.image || null,    // set initial preview URL
+          imageUrl: data.image || null,
         });
       })
-      .catch(err => {
+      .catch((err) => {
         if (err.response?.status === 404) {
           setExistingProfile(false);
         } else {
-          console.error('Profile load error', err);
-          setMessage('Error loading profile');
+          console.error("Profile load error", err);
+          setMessage("Error loading profile");
         }
       });
   }, []);
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     const { name, value, files } = e.target;
 
-    if (name === 'image') {
+    if (name === "image") {
       const file = files[0];
       if (!file) return;
-      // create temporary URL for preview
+
       const previewUrl = URL.createObjectURL(file);
-      setFormData(f => ({
+      setFormData((f) => ({
         ...f,
         image: file,
         imageUrl: previewUrl,
       }));
     } else {
-      setFormData(f => ({
+      setFormData((f) => ({
         ...f,
         [name]: value,
       }));
     }
   };
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    setMessage('');
+    setMessage("");
 
     try {
       const body = new FormData();
-      // append only non-null values
+
       Object.entries(formData).forEach(([k, v]) => {
-        if (v != null && k !== 'imageUrl') {
+        if (v != null && k !== "imageUrl") {
           body.append(k, v);
         }
       });
 
-      const method = existingProfile ? 'put' : 'post';
-      await api[method]('/providers/me', body);
+      const method = existingProfile ? "put" : "post";
+      await api[method]("/providers/me", body);
 
       setMessage(
         existingProfile
-          ? 'Profile updated successfully!'
-          : 'Profile created successfully!'
+          ? "Profile updated successfully!"
+          : "Profile created successfully!",
       );
 
-      // redirect after a short delay to let the user read the message
-      setTimeout(() => navigate('/provider/my-profile'), 1000);
+      setTimeout(() => navigate("/provider/my-profile"), 1000);
     } catch (err) {
-      console.error('Save error:', err);
-      setMessage(err.response?.data?.message || 'Failed to save profile');
+      console.error("Save error:", err);
+      setMessage(err.response?.data?.message || "Failed to save profile");
     } finally {
       setIsLoading(false);
     }
@@ -102,24 +100,24 @@ const ProviderProfileScreen = () => {
   if (existingProfile === null) {
     return (
       <div className="text-center mt-5">
-        <div className="spinner-border text-primary" role="status"/>
+        <div className="spinner-border text-primary" role="status" />
       </div>
     );
   }
 
   return (
     <div className="container py-5 d-flex justify-content-center">
-      <div className="card p-4" style={{ maxWidth: 500, width: '100%' }}>
+      <div className="card p-4" style={{ maxWidth: 500, width: "100%" }}>
         <h2 className="text-center mb-4">
-          {existingProfile ? 'Edit Your Profile' : 'Create Your Profile'}
+          {existingProfile ? "Edit Your Profile" : "Create Your Profile"}
         </h2>
 
         {message && (
           <div
             className={`alert ${
-              message.includes('successfully')
-                ? 'alert-success'
-                : 'alert-danger'
+              message.includes("successfully")
+                ? "alert-success"
+                : "alert-danger"
             }`}
           >
             {message}
@@ -127,7 +125,6 @@ const ProviderProfileScreen = () => {
         )}
 
         <form onSubmit={handleSubmit} encType="multipart/form-data">
-          {/* Name */}
           <div className="mb-3">
             <label className="form-label">Service Name</label>
             <input
@@ -139,7 +136,6 @@ const ProviderProfileScreen = () => {
             />
           </div>
 
-          {/* Category */}
           <div className="mb-3">
             <label className="form-label">Category</label>
             <select
@@ -163,7 +159,6 @@ const ProviderProfileScreen = () => {
             </select>
           </div>
 
-          {/* Phone */}
           <div className="mb-3">
             <label className="form-label">Phone Number</label>
             <input
@@ -175,7 +170,6 @@ const ProviderProfileScreen = () => {
             />
           </div>
 
-          {/* Description */}
           <div className="mb-3">
             <label className="form-label">Description</label>
             <textarea
@@ -186,7 +180,6 @@ const ProviderProfileScreen = () => {
             />
           </div>
 
-          {/* Price */}
           <div className="mb-3">
             <label className="form-label">Price</label>
             <input
@@ -198,7 +191,6 @@ const ProviderProfileScreen = () => {
             />
           </div>
 
-          {/* Location */}
           <div className="mb-3">
             <label className="form-label">Location</label>
             <input
@@ -209,7 +201,6 @@ const ProviderProfileScreen = () => {
             />
           </div>
 
-          {/* Image Preview */}
           {existingProfile && formData.imageUrl && (
             <div className="mb-3 text-center">
               <img
@@ -217,16 +208,15 @@ const ProviderProfileScreen = () => {
                 alt={formData.name}
                 className="img-thumbnail"
                 style={{ maxWidth: 150 }}
-                onError={e => {
-                  e.currentTarget.src = '/images/default.png';
+                onError={(e) => {
+                  e.currentTarget.src =
+                    "https://project-jirani-backend.onrender.com/images/default.png";
                 }}
               />
             </div>
           )}
 
-          
-
-          {/* Image Upload */}
+        
           <div className="mb-3">
             <label className="form-label">Profile Image</label>
             <input
@@ -240,10 +230,10 @@ const ProviderProfileScreen = () => {
 
           <button className="btn btn-primary w-100" disabled={isLoading}>
             {isLoading
-              ? 'Saving…'
+              ? "Saving…"
               : existingProfile
-              ? 'Update Profile'
-              : 'Create Profile'}
+                ? "Update Profile"
+                : "Create Profile"}
           </button>
         </form>
       </div>
