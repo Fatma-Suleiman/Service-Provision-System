@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import  { useState, useEffect } from 'react';
 import api from '../api';             
 import axios from 'axios';          
 import MapComponent from './MapComponent';

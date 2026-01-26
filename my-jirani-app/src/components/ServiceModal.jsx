@@ -1,4 +1,4 @@
-import React from 'react';
+
 
 const ServiceModal = ({ service, onClose }) => {
   return (

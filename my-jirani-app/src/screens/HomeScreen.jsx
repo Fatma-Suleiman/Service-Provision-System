@@ -1,4 +1,3 @@
-// src/screens/HomeScreen.jsx
 
 import { useEffect, useState } from 'react';
 import api from '../api';
@@ -15,14 +14,14 @@ const HomeScreen = () => {
 
   const token = localStorage.getItem('token') || sessionStorage.getItem('token');
 
-  // 1) Fetch public reviews (anyone can see)
+  //  Fetch public reviews 
   useEffect(() => {
     api.get('/reviews/all')
       .then(({ data }) => setReviews(data))
       .catch(err => console.error('Error loading reviews:', err));
   }, []);
 
-  // 2) Fetch YOUR completed services (for the dropdown) once you’re logged in
+  // 2) Fetch completed services (for the dropdown) once you’re logged in
   useEffect(() => {
     if (!token) return;
     console.log('Fetching completed for seeker with token:', token);

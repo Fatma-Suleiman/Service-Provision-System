@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import  { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import api from '../api';
 
@@ -46,7 +46,7 @@ const ServiceDetail = () => {
       navigate('/profile?tab=bookings');
     } catch (err) {
       console.error('Booking error:', err.response || err);
-      // take the server’s message if present
+   
       const msg = err.response?.data?.message || 'Booking failed. Please try again.';
       setBookingError(msg);
     }
